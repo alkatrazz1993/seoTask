@@ -48,7 +48,7 @@
         $messages = countMessages();
         $countPages = $messages['total'] / $messages['perPage'];
 
-echo $countPages;
+echo $countPages . "=" . $messages['total'] . '/' . $messages['perPage'];
 exit;
 
         for ($i = 1; $i <= 15; $i++) {
