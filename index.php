@@ -1,14 +1,15 @@
 ﻿<?php
 
-function __autoload($classname)
+function __autoload($className)
 {
-    $filename = $classname . ".php";
-    include_once($filename);
+    $fileName = $className . ".php";
+    include_once($fileName);
 }
 include_once 'helpers/simple_html_dom.php';
 
 $messages = new Messages();
 $subjectsMessages = $messages->getSubjectsMessages();
+$countMessages = count($subjectsMessages);
 
 ?>
 <!DOCTYPE html>
@@ -29,6 +30,7 @@ $subjectsMessages = $messages->getSubjectsMessages();
     </div>
     <div class="col-12 mx-auto text-left">
         <?php if( !empty( $subjectsMessages )) { ?>
+            <p>Количество писем: <? echo $countMessages?></p>
             <div class="table-responsive">
                 <table class="table table-hover">
                     <thead>
@@ -38,20 +40,16 @@ $subjectsMessages = $messages->getSubjectsMessages();
                     </tr>
                     </thead>
                     <tbody>
-                    <? foreach ( $subjectsMessages as $key => $subject ) {
-                        if( !empty( $subject )) { ?>
+                    <? foreach ( $subjectsMessages as $key => $subject ) { ?>
                         <tr>
                             <td><? echo $key ?></td>
                             <td><? echo $subject ?></td>
                         </tr>
-                        <?} else { ?> <p>Результатов не найдено.</p><?
-                    }}?>
+                    <? } ?>
                     </tbody>
                 </table>
             </div>
-
-        <? } ?>
-
+        <? } else { ?> <p>Результатов не найдено.</p><? } ?>
     </div>
 </body>
 </html>
